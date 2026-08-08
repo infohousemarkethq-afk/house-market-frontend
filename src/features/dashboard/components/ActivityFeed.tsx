@@ -4,7 +4,7 @@ import type { ActivityItem } from "../dashboard.types";
 import { ACTIVITY_TONE, activitySentence } from "../dashboard.utils";
 
 const ActivityFeed = ({ items }: { items: ActivityItem[] }) => (
-  <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-6">
+  <section className="min-w-0 rounded-[16px] border border-[#E7E3DA] bg-white p-5 sm:p-6">
     <h2 className="text-[17px] font-semibold text-[#141412]">Recent activity</h2>
 
     {items.length === 0 ? (
@@ -23,8 +23,11 @@ const ActivityFeed = ({ items }: { items: ActivityItem[] }) => (
                 ACTIVITY_TONE[item.type],
               )}
             />
-            <div>
-              <p className="text-[14px] leading-snug text-[#1A1917]">
+            {/* Subjects are user-supplied — a guest name or a maintenance
+                title can be one long unbroken string, which overflows the
+                card unless it's allowed to break mid-word. */}
+            <div className="min-w-0">
+              <p className="text-[14px] leading-snug break-words text-[#1A1917]">
                 {activitySentence(item)}
               </p>
               <p className="mt-0.5 text-[12px] text-[#A29C90]">

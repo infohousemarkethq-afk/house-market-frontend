@@ -135,7 +135,7 @@ const MaintenanceForm = () => {
       </Link>
 
       <div className="mt-6 mb-8">
-        <h1 className="font-serif text-[42px] leading-tight text-[#141412]">
+        <h1 className="font-serif text-[30px] leading-tight text-[#141412] sm:text-[42px]">
           Log maintenance
         </h1>
         {isPending ? (
@@ -152,7 +152,7 @@ const MaintenanceForm = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="rounded-[16px] border border-[#E7E3DA] bg-white p-7"
+        className="rounded-[16px] border border-[#E7E3DA] bg-white p-5 sm:p-7"
       >
         <div className="space-y-6">
           <TextField

@@ -76,7 +76,7 @@ const Calender = () => {
     <div className="mx-auto max-w-[1180px]">
       <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="font-serif text-[42px] leading-tight text-[#141412]">
+          <h1 className="font-serif text-[30px] leading-tight text-[#141412] sm:text-[42px]">
             Calendar
           </h1>
           <p className="mt-1 text-[15px] text-[#6B665C]">

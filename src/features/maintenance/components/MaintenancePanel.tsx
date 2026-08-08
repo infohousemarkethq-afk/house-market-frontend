@@ -32,7 +32,7 @@ const MaintenancePanel = ({ unitId, canWrite }: MaintenancePanelProps) => {
   const records = data?.items ?? [];
 
   return (
-    <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-7">
+    <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-5 sm:p-7">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-[20px] font-semibold text-[#141412]">Maintenance</h2>
 

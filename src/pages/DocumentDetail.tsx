@@ -89,7 +89,7 @@ const DocumentDetail = () => {
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <h1 className="font-serif text-[32px] leading-tight text-[#141412]">
+              <h1 className="font-serif text-[26px] leading-tight text-[#141412] sm:text-[32px]">
                 {document.documentName}
               </h1>
               {document.isSensitive && <Badge tone="warning">Logged</Badge>}

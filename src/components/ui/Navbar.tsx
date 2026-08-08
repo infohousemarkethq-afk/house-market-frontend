@@ -1,6 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Logout01Icon, Search01Icon } from "@hugeicons/core-free-icons";
+import {
+  Logout01Icon,
+  Menu01Icon,
+  Search01Icon,
+  UserAccountIcon,
+} from "@hugeicons/core-free-icons";
 
 import { useAuth } from "../../features/auth/hooks/useAuth";
 import { initials } from "../../utils/initials.util";
@@ -11,7 +17,7 @@ const ROLE_LABELS = {
   owner: "Owner",
 } as const;
 
-const Navbar = () => {
+const Navbar = ({ onOpenNav }: { onOpenNav: () => void }) => {
   const { user, viewRole, signOut, isSigningOut } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -44,8 +50,23 @@ const Navbar = () => {
     .join(" · ");
 
   return (
-    <header className="flex items-center gap-4 border-b border-[#E7E3DA] bg-white px-6 py-4 lg:px-8">
-      <div className="relative max-w-[620px] flex-1">
+    <header className="flex items-center gap-3 border-b border-[#E7E3DA] bg-white px-4 py-3 sm:gap-4 sm:px-6 sm:py-4 lg:px-8">
+      {/* The sidebar is a drawer below lg, so this is the only way to reach it. */}
+      <button
+        type="button"
+        onClick={onOpenNav}
+        aria-label="Open navigation"
+        className="flex h-[44px] w-[44px] shrink-0 cursor-pointer items-center justify-center rounded-[12px] text-[#2A2822] transition-colors hover:bg-[#F5F3EF] lg:hidden"
+      >
+        <HugeiconsIcon
+          icon={Menu01Icon}
+          size={22}
+          color="currentColor"
+          strokeWidth={1.8}
+        />
+      </button>
+
+      <div className="relative hidden min-w-0 max-w-[620px] flex-1 sm:block">
         <span className="pointer-events-none absolute top-0 left-4 flex h-[48px] items-center text-[#9A9488]">
           <HugeiconsIcon
             icon={Search01Icon}
@@ -86,6 +107,21 @@ const Navbar = () => {
             role="menu"
             className="absolute right-0 z-20 mt-2 w-[200px] rounded-[12px] border border-[#E7E3DA] bg-white p-1 shadow-lg"
           >
+            <Link
+              to="/settings"
+              role="menuitem"
+              onClick={() => setMenuOpen(false)}
+              className="flex w-full items-center gap-3 rounded-[8px] px-3 py-2.5 text-left text-[14px] text-[#4A463E] transition-colors hover:bg-[#F5F3EF]"
+            >
+              <HugeiconsIcon
+                icon={UserAccountIcon}
+                size={18}
+                color="currentColor"
+                strokeWidth={1.8}
+              />
+              Your account
+            </Link>
+
             <button
               type="button"
               role="menuitem"

@@ -142,11 +142,11 @@ const BookingDetailPage = () => {
       </Link>
 
       <div className="mt-6 grid items-start gap-5 lg:grid-cols-[1.5fr_1fr]">
-        <div className="space-y-5">
+        <div className="min-w-0 space-y-5">
           <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-6 sm:p-7">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
-                <h1 className="font-serif text-[34px] leading-tight text-[#141412]">
+                <h1 className="font-serif text-[27px] leading-tight text-[#141412] sm:text-[34px]">
                   {booking.guestName}
                 </h1>
                 <p className="mt-1 text-[15px] text-[#6B665C]">
@@ -238,7 +238,7 @@ const BookingDetailPage = () => {
           </section>
         </div>
 
-        <div className="space-y-5">
+        <div className="min-w-0 space-y-5">
           {amount && (
             <section className="rounded-[16px] bg-[#141412] p-6 text-[#F5F3EF]">
               <p className="text-[13px] text-[#8A857B]">{amount.label}</p>

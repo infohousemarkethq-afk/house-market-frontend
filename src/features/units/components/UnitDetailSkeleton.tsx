@@ -10,7 +10,7 @@ const UnitDetailSkeleton = () => (
 
     <div className="grid gap-6 lg:grid-cols-[1fr_360px]" aria-hidden="true">
       <div className="space-y-6">
-        <div className="rounded-[16px] border border-[#E7E3DA] bg-white p-7">
+        <div className="rounded-[16px] border border-[#E7E3DA] bg-white p-5 sm:p-7">
           <div className="flex items-center gap-3">
             <Skeleton className="h-[34px] w-[220px]" />
             <Skeleton className="h-[26px] w-[80px] rounded-full" />
@@ -27,7 +27,7 @@ const UnitDetailSkeleton = () => (
           <Skeleton className="mt-2 h-[16px] w-2/3" />
         </div>
 
-        <div className="rounded-[16px] border border-[#E7E3DA] bg-white p-7">
+        <div className="rounded-[16px] border border-[#E7E3DA] bg-white p-5 sm:p-7">
           <Skeleton className="h-[22px] w-[110px]" />
           <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {Array.from({ length: 4 }, (_, index) => (

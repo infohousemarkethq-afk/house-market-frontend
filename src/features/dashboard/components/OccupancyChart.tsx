@@ -13,7 +13,10 @@ const OccupancyChart = ({
   bookedNights,
   availableNights,
 }: OccupancyChartProps) => (
-  <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-6 sm:p-7">
+  // min-w-0 is what lets the scroller below actually scroll: as a grid child
+  // this section would otherwise size to its widest content and push the
+  // whole page sideways.
+  <section className="min-w-0 rounded-[16px] border border-[#E7E3DA] bg-white p-5 sm:p-7">
     <div>
       <h2 className="text-[19px] font-semibold text-[#141412]">
         Occupancy by unit
@@ -28,9 +31,12 @@ const OccupancyChart = ({
         No active units to measure this month.
       </p>
     ) : (
+      // No fixed min-width: the 72px track floor already decides when the bars
+      // stop fitting, so a handful of units fills the card and only a long
+      // portfolio scrolls.
       <div className="mt-8 overflow-x-auto">
         <div
-          className="grid min-w-[420px] items-end gap-4"
+          className="grid items-end gap-4"
           style={{
             gridTemplateColumns: `repeat(${units.length}, minmax(72px, 1fr))`,
             height: 220,

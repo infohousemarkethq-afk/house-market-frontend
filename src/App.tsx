@@ -10,6 +10,7 @@ import PublicOnlyRoute from "./routes/PublicOnlyRoute";
 import AcceptInvitePage from "./pages/AcceptInvitePage";
 import BookingDetail from "./pages/BookingDetail";
 import Calender from "./pages/Calender";
+import Company from "./pages/Company";
 import DamageReport from "./pages/DamageReport";
 import Dashboard from "./pages/Dashboard";
 import DocumentDetail from "./pages/DocumentDetail";
@@ -20,6 +21,7 @@ import LoginPage from "./pages/LoginPage";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import Settings from "./pages/Settings";
 import SignupPage from "./pages/SignupPage";
 import Team from "./pages/Team";
 import UnitDetail from "./pages/UnitDetail";
@@ -62,6 +64,8 @@ function App() {
                 <Route path="/documents" element={<Documents />} />
                 <Route path="/documents/:id" element={<DocumentDetail />} />
                 <Route path="/team" element={<Team />} />
+                <Route path="/company" element={<Company />} />
+                <Route path="/settings" element={<Settings />} />
               </Route>
             </Route>
 

@@ -154,7 +154,7 @@ const DamageReport = () => {
         <p className="font-label text-[12px] tracking-[0.06em] text-[#8A857B]">
           STEP {step} OF 3
         </p>
-        <h1 className="mt-1 font-serif text-[36px] leading-tight text-[#141412]">
+        <h1 className="mt-1 font-serif text-[28px] leading-tight text-[#141412] sm:text-[36px]">
           Report damage
         </h1>
       </div>
@@ -162,7 +162,7 @@ const DamageReport = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="rounded-[16px] border border-[#E7E3DA] bg-white p-7"
+        className="rounded-[16px] border border-[#E7E3DA] bg-white p-5 sm:p-7"
       >
         {step === 1 && (
           <div className="space-y-5">

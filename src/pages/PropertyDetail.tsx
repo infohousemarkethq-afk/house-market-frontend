@@ -127,7 +127,7 @@ const PropertyDetail = () => {
 
         <div className="flex-1 p-7">
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-serif text-[36px] leading-tight text-[#141412]">
+            <h1 className="font-serif text-[28px] leading-tight text-[#141412] sm:text-[36px]">
               {property.propertyName}
             </h1>
             <Badge>{typeLabel(property)}</Badge>

@@ -10,6 +10,7 @@ import { getApiErrorMessage } from "../utils/apiError.util";
 import { useAuth } from "../features/auth/hooks/useAuth";
 import DeactivateMemberModal from "../features/team/components/DeactivateMemberModal";
 import InviteModal from "../features/team/components/InviteModal";
+import ManageUnitsModal from "../features/team/components/ManageUnitsModal";
 import InvitesTable from "../features/team/components/InvitesTable";
 import MembersTable from "../features/team/components/MembersTable";
 import {
@@ -28,6 +29,7 @@ const Team = () => {
   const [pendingDeactivation, setPendingDeactivation] = useState<Member | null>(
     null,
   );
+  const [managingUnitsFor, setManagingUnitsFor] = useState<Member | null>(null);
 
   const members = useMembers();
   const invites = useInvites();
@@ -59,7 +61,7 @@ const Team = () => {
     <div className="mx-auto max-w-[1180px]">
       <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="font-serif text-[42px] leading-tight text-[#141412]">
+          <h1 className="font-serif text-[30px] leading-tight text-[#141412] sm:text-[42px]">
             Team
           </h1>
           <p className="mt-1 text-[15px] text-[#6B665C]">
@@ -105,6 +107,7 @@ const Team = () => {
             members={members.data ?? []}
             currentUserId={user?.id}
             onDeactivate={setPendingDeactivation}
+            onManageUnits={setManagingUnitsFor}
           />
         ) : (invites.data ?? []).length === 0 ? (
           <EmptyState
@@ -136,6 +139,14 @@ const Team = () => {
         <DeactivateMemberModal
           member={pendingDeactivation}
           onClose={() => setPendingDeactivation(null)}
+        />
+      )}
+
+      {managingUnitsFor && (
+        <ManageUnitsModal
+          member={managingUnitsFor}
+          units={units}
+          onClose={() => setManagingUnitsFor(null)}
         />
       )}
     </div>

@@ -56,7 +56,7 @@ const Dashboard = () => {
   return (
     <div className="mx-auto max-w-[1180px]">
       <div className="mb-8">
-        <h1 className="font-serif text-[42px] leading-tight text-[#141412]">
+        <h1 className="font-serif text-[30px] leading-tight text-[#141412] sm:text-[42px]">
           Dashboard
         </h1>
         <p className="mt-1 text-[15px] text-[#6B665C]">
@@ -74,7 +74,10 @@ const Dashboard = () => {
           availableNights={data.cards.occupancy.availableNights}
         />
 
-        <div className="space-y-5">
+        {/* min-w-0: a grid child defaults to min-width:auto, so without this
+            a long guest name or unit label widens the column past the screen
+            instead of wrapping inside it. */}
+        <div className="min-w-0 space-y-5">
           <TodayPanel items={data.today} />
           <ActivityFeed items={data.activity} />
         </div>

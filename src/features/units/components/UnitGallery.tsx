@@ -115,7 +115,7 @@ const UnitGallery = ({ unitId, images, canEdit }: UnitGalleryProps) => {
   };
 
   return (
-    <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-7">
+    <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-5 sm:p-7">
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-3">
         <h2 className="text-[20px] font-semibold text-[#141412]">Gallery</h2>
         <p className="text-[13px] text-[#8A857B]">

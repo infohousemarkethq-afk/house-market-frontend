@@ -24,6 +24,14 @@ export interface Member {
   _count: { assignments: number };
 }
 
+/** A unit a manager operates, from GET /company/members/:userId/units. */
+export interface AssignedUnit {
+  id: string;
+  unitName: string;
+  property: { id: string; propertyName: string };
+  assignedAt: string;
+}
+
 export const INVITE_ROLES = ["MANAGER", "OWNER"] as const;
 export type InviteRole = (typeof INVITE_ROLES)[number];
 

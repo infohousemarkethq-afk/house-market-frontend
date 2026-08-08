@@ -4,19 +4,21 @@ import { cn } from "../../../utils/cn.util";
 import { initials } from "../../../utils/initials.util";
 import { MEMBER_ROLE_LABEL, type Member } from "../team.types";
 
-const COLUMNS = "grid grid-cols-[2fr_1.6fr_1fr_1fr_120px] gap-4 px-6";
+const COLUMNS = "grid grid-cols-[2fr_1.6fr_1fr_1fr_190px] gap-4 px-6";
 
 interface MembersTableProps {
   members: Member[];
   /** The signed-in admin, who can't deactivate themselves. */
   currentUserId: string | undefined;
   onDeactivate: (member: Member) => void;
+  onManageUnits: (member: Member) => void;
 }
 
 const MembersTable = ({
   members,
   currentUserId,
   onDeactivate,
+  onManageUnits,
 }: MembersTableProps) => (
   <div className="overflow-x-auto rounded-[16px] border border-[#E7E3DA] bg-white">
     <div className="min-w-[820px]">
@@ -73,7 +75,19 @@ const MembersTable = ({
                 : `${member._count.assignments} assigned`}
             </div>
 
-            <div className="text-right">
+            <div className="flex flex-wrap justify-end gap-2">
+              {/* Assignments only mean something for managers — an admin
+                  already reaches every unit, and the API 400s on the attempt. */}
+              {!isDeactivated && member.role === "MANAGER" && (
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => onManageUnits(member)}
+                >
+                  Units
+                </Button>
+              )}
+
               {/* No restore action: the API has no endpoint to undo this yet.
                   Deactivating yourself is refused server-side, so it isn't
                   offered either. */}

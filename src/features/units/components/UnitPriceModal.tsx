@@ -53,8 +53,6 @@ const UnitPriceModal = ({
       {
         id: unitId,
         pricePerNight: toKobo(values.pricePerNight),
-        // Omitted rather than nulled when left blank and never set, so an
-        // untouched owner rate isn't wiped by a guest-price edit.
         ...(owner
           ? { ownerRatePerNight: toKobo(owner) }
           : ownerRatePerNight != null

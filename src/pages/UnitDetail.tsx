@@ -118,10 +118,10 @@ const UnitDetail = () => {
       </Link>
 
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-        <div className="space-y-6">
-          <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-7">
+        <div className="min-w-0 space-y-6">
+          <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-5 sm:p-7">
             <div className="flex flex-wrap items-center gap-3">
-              <h1 className="font-serif text-[36px] leading-tight text-[#141412]">
+              <h1 className="font-serif text-[28px] leading-tight text-[#141412] sm:text-[36px]">
                 {unit.unitName}
               </h1>
               <Badge>{unitTypeLabel(unit)}</Badge>
@@ -186,13 +186,13 @@ const UnitDetail = () => {
           />
         </div>
 
-        <div className="space-y-6">
-          <section className="rounded-[16px] bg-[#141412] p-7 text-[#F5F3EF]">
+        <div className="min-w-0 space-y-6">
+          <section className="rounded-[16px] bg-[#141412] p-5 text-[#F5F3EF] sm:p-7">
             <p className="text-[14px] text-[#A29B8E]">
               {rate?.label ?? "Nightly rate"}
             </p>
 
-            <p className="mt-2 font-serif text-[42px] leading-none">
+            <p className="mt-2 font-serif text-[34px] leading-none sm:text-[42px]">
               {rate ? formatNaira(rate.kobo) : "Not set"}
             </p>
 
@@ -220,7 +220,7 @@ const UnitDetail = () => {
             )}
           </section>
 
-          <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-7">
+          <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-5 sm:p-7">
             <h2 className="text-[20px] font-semibold text-[#141412]">Owners</h2>
 
             {unit.owners.length === 0 ? (
@@ -250,7 +250,7 @@ const UnitDetail = () => {
           </section>
 
           {isAdmin && (
-            <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-7">
+            <section className="rounded-[16px] border border-[#E7E3DA] bg-white p-5 sm:p-7">
               {archived ? (
                 <>
                   <p className="text-[15px] leading-relaxed text-[#6B665C]">

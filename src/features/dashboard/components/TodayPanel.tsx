@@ -13,11 +13,11 @@ function detailFor(item: TodayItem): string {
 }
 
 const TodayPanel = ({ items }: { items: TodayItem[] }) => (
-  <section className="rounded-[16px] bg-[#141412] p-6 text-[#F5F3EF]">
+  <section className="min-w-0 rounded-[16px] bg-[#141412] p-5 text-[#F5F3EF] sm:p-6">
     <h2 className="text-[17px] font-semibold">Today</h2>
 
     {items.length === 0 ? (
-      <p className="mt-4 text-[14px] leading-relaxed text-[#8A857B]">
+      <p className="mt-4 text-[14px] leading-relaxed break-words text-[#8A857B]">
         Nothing moving today — no arrivals, departures or blocks starting.
       </p>
     ) : (
