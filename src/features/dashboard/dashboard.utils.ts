@@ -1,112 +1,79 @@
-import {
-  Building01Icon,
-  Calendar03Icon,
-  CreditCardIcon,
-  File02Icon,
-  Home01Icon,
-  UserGroupIcon,
-} from "@hugeicons/core-free-icons";
+import type {
+  ActivityItem,
+  DashboardScope,
+  TodayItemType,
+} from "./dashboard.types";
 
-import { formatNaira } from "../../utils/formatNaira.util";
-import { CALENDAR_MONTH } from "../../utils/formatTime.util";
-import {
-  nightsBlocked,
-  nightsBooked,
-  occupancyPct,
-  revenueFor,
-} from "../calander/calander.utils";
-import { DOCUMENTS } from "../documents/documents.fixtures";
-import { isSensitive } from "../documents/document.type";
-import { PROPERTIES } from "../properties/properties.fixtures";
-import { INVITATIONS, MEMBERS } from "../team/team.fixtures";
-import { companyUnits } from "../units/units.utils";
-import type { DashboardTile, OccupancyBar } from "./dashboard.types";
-
-function liveUnits() {
-  return companyUnits().filter((unit) => !unit.archivedAt);
-}
-
-function liveProperties() {
-  return PROPERTIES.filter((property) => !property.archivedAt);
-}
-
-function scope() {
-  const units = liveUnits();
-  const booked = units.reduce((total, unit) => total + nightsBooked(unit.id), 0);
-  const blocked = units.reduce(
-    (total, unit) => total + nightsBlocked(unit.id),
-    0,
-  );
-  const available = units.length * CALENDAR_MONTH.days - blocked;
-  const revenue = units.reduce((total, unit) => total + revenueFor(unit.id), 0);
-  return { units, booked, available, revenue };
-}
-
-export function dashboardTiles(): DashboardTile[] {
-  const { units, booked, available, revenue } = scope();
-  const activeMembers = MEMBERS.filter((member) => !member.deactivatedAt).length;
-  const pendingInvites = INVITATIONS.filter(
-    (invite) => invite.status === "PENDING",
-  ).length;
-  const sensitiveCount = DOCUMENTS.filter((doc) =>
-    isSensitive(doc.documentCategory),
-  ).length;
-
-  return [
-    {
-      label: "Properties",
-      value: String(liveProperties().length),
-      caption: `${units.length} units`,
-      icon: Building01Icon,
-    },
-    {
-      label: "Active units",
-      value: String(units.length),
-      caption: `of ${companyUnits().length}`,
-      icon: Home01Icon,
-    },
-    {
-      label: "Documents",
-      value: String(DOCUMENTS.length),
-      caption: `${sensitiveCount} sensitive`,
-      icon: File02Icon,
-    },
-    {
-      label: "Occupancy",
-      value: `${available > 0 ? Math.round((booked / available) * 100) : 0}%`,
-      caption: "August",
-      icon: Calendar03Icon,
-      planned: true,
-    },
-    {
-      label: "Revenue",
-      value: formatNaira(revenue),
-      caption: "August",
-      icon: CreditCardIcon,
-      planned: true,
-    },
-    {
-      label: "Team",
-      value: String(activeMembers),
-      caption: `${pendingInvites} invite pending`,
-      icon: UserGroupIcon,
-    },
+/** "Bella Suites — 4 properties, 5 units, 3 staff." */
+export function scopeLine(scope: DashboardScope): string {
+  const parts = [
+    `${scope.propertyCount} ${scope.propertyCount === 1 ? "property" : "properties"}`,
+    `${scope.unitCount} ${scope.unitCount === 1 ? "unit" : "units"}`,
   ];
+
+  if (scope.staffCount !== undefined) {
+    parts.push(`${scope.staffCount} staff`);
+  }
+
+  const counts = `${parts.join(", ")}.`;
+
+  // An owner belongs to no company, so there's no name to lead with.
+  return scope.companyName ? `${scope.companyName} — ${counts}` : counts;
 }
 
-export function occupancyBars(): OccupancyBar[] {
-  return liveUnits().map((unit) => ({
-    unitName: unit.unitName,
-    pct: occupancyPct(unit.id),
-  }));
+/**
+ * Builds the sentence from the parts the API sends. Anything missing is
+ * dropped rather than printed as "undefined" — an activity row with no actor
+ * is normal (a system-created record), not an error.
+ */
+export function activitySentence(item: ActivityItem): string {
+  const actor = item.actor?.fullName;
+  const unit = item.unit ? ` on ${item.unit.unitName}` : "";
+
+  switch (item.type) {
+    case "DOCUMENT_UPLOADED":
+      return actor
+        ? `${actor} filed ${item.subject}${unit}`
+        : `${item.subject} was filed${unit}`;
+
+    case "DOCUMENT_DOWNLOADED":
+      return actor
+        ? `${actor} downloaded ${item.subject}${unit}`
+        : `${item.subject} was downloaded${unit}`;
+
+    case "BOOKING_CREATED":
+      return actor
+        ? `${actor} booked ${item.subject}${unit}`
+        : `${item.subject} was booked${unit}`;
+
+    case "MAINTENANCE_LOGGED":
+      return actor
+        ? `${actor} logged ${item.subject}${unit}`
+        : `${item.subject} was logged${unit}`;
+
+    case "DAMAGE_REPORTED":
+      return actor
+        ? `${actor} reported ${item.subject}${unit}`
+        : `${item.subject} was reported${unit}`;
+  }
 }
 
-export function dashboardSubtitle(): string {
-  const activeMembers = MEMBERS.filter((member) => !member.deactivatedAt).length;
-  return `Bella Suites — ${liveProperties().length} properties, ${liveUnits().length} units, ${activeMembers} staff.`;
-}
+export const ACTIVITY_TONE: Record<ActivityItem["type"], string> = {
+  DOCUMENT_UPLOADED: "bg-[#3F7D5A]",
+  DOCUMENT_DOWNLOADED: "bg-[#B98A5E]",
+  BOOKING_CREATED: "bg-[#141412]",
+  MAINTENANCE_LOGGED: "bg-[#8A857B]",
+  DAMAGE_REPORTED: "bg-[#A8543C]",
+};
 
-export function occupancyCaption(): string {
-  const { booked, available } = scope();
-  return `${booked} of ${available} available nights in August`;
-}
+export const TODAY_LABEL: Record<TodayItemType, string> = {
+  CHECK_IN: "Checking in",
+  CHECK_OUT: "Checking out",
+  BLOCKED: "Blocked",
+};
+
+export const TODAY_TONE: Record<TodayItemType, string> = {
+  CHECK_IN: "bg-[#3F7D5A] text-white",
+  CHECK_OUT: "bg-[#2C2A26] text-[#E8E5DC]",
+  BLOCKED: "bg-[#5C4A33] text-[#E8DDCB]",
+};

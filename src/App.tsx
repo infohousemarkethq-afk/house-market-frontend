@@ -8,13 +8,20 @@ import AppLayout from "./components/layout/AppLayout";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicOnlyRoute from "./routes/PublicOnlyRoute";
 import AcceptInvitePage from "./pages/AcceptInvitePage";
+import BookingDetail from "./pages/BookingDetail";
+import Calender from "./pages/Calender";
+import DamageReport from "./pages/DamageReport";
 import Dashboard from "./pages/Dashboard";
+import DocumentDetail from "./pages/DocumentDetail";
+import MaintenanceForm from "./pages/MaintenanceForm";
+import Documents from "./pages/Documents";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import LoginPage from "./pages/LoginPage";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import SignupPage from "./pages/SignupPage";
+import Team from "./pages/Team";
 import UnitDetail from "./pages/UnitDetail";
 import Units from "./pages/Units";
 import VerifyOtpPage from "./pages/VerifyOtpPage";
@@ -45,6 +52,16 @@ function App() {
                 <Route path="/properties/:id" element={<PropertyDetail />} />
                 <Route path="/units" element={<Units />} />
                 <Route path="/units/:id" element={<UnitDetail />} />
+                <Route
+                  path="/units/:id/maintenance/new"
+                  element={<MaintenanceForm />}
+                />
+                <Route path="/units/:id/damage" element={<DamageReport />} />
+                <Route path="/calendar" element={<Calender />} />
+                <Route path="/bookings/:id" element={<BookingDetail />} />
+                <Route path="/documents" element={<Documents />} />
+                <Route path="/documents/:id" element={<DocumentDetail />} />
+                <Route path="/team" element={<Team />} />
               </Route>
             </Route>
 

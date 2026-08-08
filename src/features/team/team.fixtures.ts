@@ -1,6 +1,6 @@
-import type { Invitation, Member } from "./team.types";
+import type { InvitationFixture, MemberFixture } from "./team.types";
 
-export const MEMBERS: Member[] = [
+export const MEMBERS: MemberFixture[] = [
   {
     id: "m1",
     fullName: "Adaeze Nwosu",
@@ -35,7 +35,7 @@ export const MEMBERS: Member[] = [
   },
 ];
 
-export const INVITATIONS: Invitation[] = [
+export const INVITATIONS: InvitationFixture[] = [
   {
     id: "i1",
     fullName: "Grace Adeyemi",

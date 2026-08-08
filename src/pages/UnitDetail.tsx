@@ -12,6 +12,7 @@ import { getApiErrorMessage } from "../utils/apiError.util";
 import { formatNaira } from "../utils/formatNaira.util";
 import { initials } from "../utils/initials.util";
 import { useAuth } from "../features/auth/hooks/useAuth";
+import MaintenancePanel from "../features/maintenance/components/MaintenancePanel";
 import UnitDetailSkeleton from "../features/units/components/UnitDetailSkeleton";
 import UnitFormModal from "../features/units/components/UnitFormModal";
 import UnitGallery from "../features/units/components/UnitGallery";
@@ -175,6 +176,13 @@ const UnitDetail = () => {
             unitId={unit.id}
             images={unit.images}
             canEdit={isAdmin && !archived}
+          />
+
+          {/* Staff only: assertCanWrite in maintenance.scope.ts refuses owners,
+              so offering them the buttons would only produce a 403. */}
+          <MaintenancePanel
+            unitId={unit.id}
+            canWrite={viewRole === "admin" || viewRole === "manager"}
           />
         </div>
 
