@@ -38,7 +38,7 @@ const NAV_ITEMS: NavItem[] = [
   { to: "/calendar", label: "Calendar", icon: Calendar03Icon },
   { to: "/documents", label: "Documents", icon: File01Icon },
   { to: "/team", label: "Team", icon: UserGroupIcon, roles: ["admin"] },
-  { to: "/payments", label: "Payments", icon: CreditCardIcon },
+  { to: "/payments", label: "Payments", icon: CreditCardIcon, roles: ["admin", "owner"] },
   { to: "/reports", label: "Reports", icon: Analytics01Icon },
   { to: "/company", label: "Company", icon: Building06Icon, roles: ["admin"] },
 ];

@@ -8,7 +8,10 @@ import Callout from "../../../components/ui/Callout";
 import TextField from "../../../components/ui/TextField";
 import { getApiErrorMessage } from "../../../utils/apiError.util";
 import { useResendOtp, useVerifyOtp } from "../hooks/useAuthMutations";
-import { VerifyOtpSchema, type VerifyOtpValues } from "../schema/VerifyOtpSchema";
+import {
+  VerifyOtpSchema,
+  type VerifyOtpValues,
+} from "../schema/VerifyOtpSchema";
 
 const VerifyOtpForm = () => {
   const [searchParams] = useSearchParams();
@@ -33,9 +36,6 @@ const VerifyOtpForm = () => {
     verifyOtp.mutate(
       { email, code },
       {
-        // Verifying proves they own the address, so the API signs them in and
-        // the mutation seeds the session cache. Sending them to /login here
-        // would ask an already-signed-in user to sign in.
         onSuccess: () => {
           toast.success("Email verified. You're all set.");
           navigate("/dashboard", { replace: true });
@@ -55,7 +55,9 @@ const VerifyOtpForm = () => {
       {
         onSuccess: () => toast.success("We sent a new code to your email."),
         onError: (error) =>
-          toast.error(getApiErrorMessage(error, "We couldn't resend the code.")),
+          toast.error(
+            getApiErrorMessage(error, "We couldn't resend the code."),
+          ),
       },
     );
   };

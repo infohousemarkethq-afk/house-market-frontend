@@ -15,6 +15,7 @@ import DamageReport from "./pages/DamageReport";
 import Dashboard from "./pages/Dashboard";
 import DocumentDetail from "./pages/DocumentDetail";
 import MaintenanceForm from "./pages/MaintenanceForm";
+import Payments from "./pages/Payments";
 import Documents from "./pages/Documents";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import LoginPage from "./pages/LoginPage";
@@ -63,6 +64,7 @@ function App() {
                 <Route path="/bookings/:id" element={<BookingDetail />} />
                 <Route path="/documents" element={<Documents />} />
                 <Route path="/documents/:id" element={<DocumentDetail />} />
+                <Route path="/payments" element={<Payments />} />
                 <Route path="/team" element={<Team />} />
                 <Route path="/company" element={<Company />} />
                 <Route path="/settings" element={<Settings />} />
