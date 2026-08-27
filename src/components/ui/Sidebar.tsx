@@ -30,6 +30,9 @@ interface NavItem {
  * Properties and Company are admin-only because the API is: every route in
  * the backend's property.routes.ts sits behind requireRole("COMPANY_ADMIN"),
  * so showing the link to a manager would only lead to a 403.
+ *
+ * Reports are gated to admin and owner — managers get a 403 from the backend
+ * and showing them the link would only cause confusion.
  */
 const NAV_ITEMS: NavItem[] = [
   { to: "/dashboard", label: "Dashboard", icon: DashboardSquare01Icon },
@@ -39,7 +42,7 @@ const NAV_ITEMS: NavItem[] = [
   { to: "/documents", label: "Documents", icon: File01Icon },
   { to: "/team", label: "Team", icon: UserGroupIcon, roles: ["admin"] },
   { to: "/payments", label: "Payments", icon: CreditCardIcon, roles: ["admin", "owner"] },
-  { to: "/reports", label: "Reports", icon: Analytics01Icon },
+  { to: "/reports", label: "Reports", icon: Analytics01Icon, roles: ["admin", "owner"] },
   { to: "/company", label: "Company", icon: Building06Icon, roles: ["admin"] },
 ];
 
@@ -69,7 +72,6 @@ const Sidebar = ({ open, onClose }: SidebarProps) => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
-
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open, onClose]);
