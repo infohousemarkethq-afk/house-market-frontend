@@ -1,32 +1,42 @@
-export interface ReportRow {
+// All money fields are integer kobo. Format at render time only via formatNaira.
+
+export interface UnitPerformance {
   unitId: string;
   unitName: string;
   propertyName: string;
-  occupancyPct: number;
-  nights: number;
-  /** Kobo. Revenue for staff, earnings at the owner's rate for owners. */
-  earned: number;
+  occupancyPercent: number;
+  nightsBooked: number;
+  nightsAvailable: number;
+  earned: number; // kobo — totalAmount for admin, ownerAmount for owner
 }
 
-export interface SummaryTile {
-  label: string;
-  value: string;
-  caption: string;
+export interface PerformanceReport {
+  month: string; // "2026-08"
+  totals: {
+    earned: number;
+    nightsBooked: number;
+    nightsAvailable: number;
+    occupancyPercent: number;
+    unitsLet: number;
+    unitCount: number;
+  };
+  byUnit: UnitPerformance[];
 }
 
 export interface UnitReport {
-  unitName: string;
-  propertyLine: string;
-  occupancyPct: number;
-  revenueLabel: string;
-  /** Kobo. */
-  revenue: number;
-  timesBooked: number;
+  month: string;
+  unit: {
+    id: string;
+    unitName: string;
+    propertyName: string;
+  };
+  occupancyPercent: number;
   nightsBooked: number;
-  avgStay: string;
-  avgNightly: string;
-  blockedNights: string;
-  rateCaption: string;
-  /** Kobo. */
-  rate: number;
+  nightsAvailable: number;
+  nightsBlocked: number;
+  stays: number;
+  averageStayNights: number;
+  earned: number;          // kobo
+  averagePerNight: number; // kobo
+  ratePerNight: number;    // kobo — pricePerNight for admin, ownerRatePerNight for owner
 }

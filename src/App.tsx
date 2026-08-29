@@ -21,6 +21,7 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import LoginPage from "./pages/LoginPage";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
+import Report from "./pages/Report";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import Settings from "./pages/Settings";
 import SignupPage from "./pages/SignupPage";
@@ -65,6 +66,7 @@ function App() {
                 <Route path="/documents" element={<Documents />} />
                 <Route path="/documents/:id" element={<DocumentDetail />} />
                 <Route path="/payments" element={<Payments />} />
+                <Route path="/reports" element={<Report />} />
                 <Route path="/team" element={<Team />} />
                 <Route path="/company" element={<Company />} />
                 <Route path="/settings" element={<Settings />} />
