@@ -53,47 +53,6 @@ function MonthPicker({ value, onChange }: MonthPickerProps) {
   );
 }
 
-// ─── Per-unit table ───────────────────────────────────────────────────────────
-
-interface UnitRowProps {
-  unitName: string;
-  propertyName: string;
-  occupancyPercent: number;
-  nightsBooked: number;
-  nightsAvailable: number;
-  earned: number;
-  role: string;
-}
-
-function UnitRow({
-  unitName,
-  propertyName,
-  occupancyPercent,
-  nightsBooked,
-  nightsAvailable,
-  earned,
-  role,
-}: UnitRowProps) {
-  return (
-    <tr className="border-t border-[#E7E3DA]">
-      <td className="py-4 pr-4">
-        <p className="text-[14px] font-medium text-[#141412]">{unitName}</p>
-        <p className="text-[12px] text-[#8A857B]">{propertyName}</p>
-      </td>
-      <td className="py-4 pr-4 text-[14px] text-[#141412]">
-        {occupancyPercent}%
-      </td>
-      <td className="py-4 pr-4 text-[14px] text-[#141412]">
-        {nightsBooked}{" "}
-        <span className="text-[#8A857B]">/ {nightsAvailable}</span>
-      </td>
-      <td className="py-4 text-[14px] text-[#141412]">
-        {earned > 0 ? formatNaira(earned) : "—"}
-      </td>
-    </tr>
-  );
-}
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 const Report = () => {
