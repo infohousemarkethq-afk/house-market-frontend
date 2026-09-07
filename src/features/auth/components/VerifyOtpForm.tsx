@@ -27,7 +27,6 @@ const VerifyOtpForm = () => {
     formState: { errors },
   } = useForm<VerifyOtpValues>({
     resolver: zodResolver(VerifyOtpSchema),
-    mode: "onTouched",
   });
 
   const onSubmit = ({ code }: VerifyOtpValues) => {
@@ -70,20 +69,22 @@ const VerifyOtpForm = () => {
         </h2>
         <p className="mt-1 text-[15px] text-[#6B665C]">
           {email
-            ? `Enter the 6-digit code we sent to ${email}.`
-            : "Enter the 6-digit code we sent to your email."}
+            ? `Enter the 6-character code we sent to ${email}.`
+            : "Enter the 6-character code we sent to your email."}
         </p>
       </div>
 
       {email ? (
         <>
-          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
               label="Verification code"
-              inputMode="numeric"
               autoComplete="one-time-code"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
               maxLength={6}
-              placeholder="000000"
+              placeholder="k7mq3p"
               className="font-label tracking-[0.5em]"
               error={errors.code?.message}
               {...register("code")}

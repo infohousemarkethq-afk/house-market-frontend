@@ -121,7 +121,7 @@ const LoginForm = () => {
           className="mt-6"
         >
           <p>
-            We sent a 6-digit code to {unverifiedEmail}. Enter it to activate
+            We sent a 6-character code to {unverifiedEmail}. Enter it to activate
             your account.
           </p>
           <Button
