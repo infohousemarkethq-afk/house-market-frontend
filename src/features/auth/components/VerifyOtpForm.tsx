@@ -55,7 +55,10 @@ const VerifyOtpForm = () => {
         onSuccess: () => toast.success("We sent a new code to your email."),
         onError: (error) =>
           toast.error(
-            getApiErrorMessage(error, "We couldn't resend the code."),
+            getApiErrorMessage(
+              error,
+              "We could not resend the code, try again later.",
+            ),
           ),
       },
     );
